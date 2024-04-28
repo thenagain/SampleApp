@@ -11,6 +11,7 @@
 		C28876732BDD2B0600E33A05 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28876722BDD2B0600E33A05 /* ContentView.swift */; };
 		C28876752BDD2B0E00E33A05 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C28876742BDD2B0E00E33A05 /* Assets.xcassets */; };
 		C28876782BDD2B0E00E33A05 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C28876772BDD2B0E00E33A05 /* Preview Assets.xcassets */; };
+		C28876802BDE47F500E33A05 /* SamplePackage in Frameworks */ = {isa = PBXBuildFile; productRef = C288767F2BDE47F500E33A05 /* SamplePackage */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C28876802BDE47F500E33A05 /* SamplePackage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +85,9 @@
 			dependencies = (
 			);
 			name = SampleApp;
+			packageProductDependencies = (
+				C288767F2BDE47F500E33A05 /* SamplePackage */,
+			);
 			productName = SampleApp;
 			productReference = C288766D2BDD2B0600E33A05 /* SampleApp.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +116,9 @@
 				Base,
 			);
 			mainGroup = C28876642BDD2B0600E33A05;
+			packageReferences = (
+				C288767E2BDE47F500E33A05 /* XCRemoteSwiftPackageReference "SamplePackage" */,
+			);
 			productRefGroup = C288766E2BDD2B0600E33A05 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -344,6 +352,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C288767E2BDE47F500E33A05 /* XCRemoteSwiftPackageReference "SamplePackage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/thenagain/SamplePackage.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C288767F2BDE47F500E33A05 /* SamplePackage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C288767E2BDE47F500E33A05 /* XCRemoteSwiftPackageReference "SamplePackage" */;
+			productName = SamplePackage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C28876652BDD2B0600E33A05 /* Project object */;
 }
