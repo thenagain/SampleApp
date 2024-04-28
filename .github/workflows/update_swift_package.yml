@@ -1,0 +1,37 @@
+name: Update Swift Packages
+
+on:
+  workflow_dispatch:
+    branches: [main]
+
+jobs:
+  update_swift_package_manager:
+    runs-on: macos-14
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure NETRC for GitHub
+        run: echo "${{ secrets.NETRC_GITHUB }}" >> ~/.netrc
+
+      - name: Select Xcode version
+        run: sudo xcode-select -s /Applications/Xcode_15.2.app
+
+      - name: Update SwiftPM
+        run: |
+          rm -f SampleApp/SampleApp.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved
+          xcodebuild -resolvePackageDependencies -project SampleApp/SampleApp.xcodeproj -scheme SampleApp -scmProvider system
+
+      - name: Create a Pull Request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "⬆️ update Package.resolved"
+          title: "⬆️ Update Swift Packages"
+          body: |
+            This PR updates the Swift Packages.
+          branch: chore/update-swift-packages
+          base: main
+          draft: true
