@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/thenagain/SamplePackage.git",
       "state" : {
-        "revision" : "1374b3c322d1d7b19cc468b0834402870c8709d5",
-        "version" : "0.1.0"
+        "revision" : "3c0baec328a9737a7fc7b32a2b0bdff65fc9bdc6",
+        "version" : "0.2.0"
       }
     }
   ],
