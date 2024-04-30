@@ -34,6 +34,8 @@ jobs:
           branch: chore/update-swift-packages
           base: main
           draft: true
+          assignees: thenagain
+          reviewers: thenagain
       - name: Check outputs
         if: ${{ steps.create_pr.outputs.pull-request-number }}
         run: |
