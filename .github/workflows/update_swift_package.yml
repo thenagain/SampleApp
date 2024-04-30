@@ -6,8 +6,10 @@ on:
 
 jobs:
   update_swift_package_manager:
-    runs-on: macos-14
-    timeout-minutes: 10
+    runs-on: ${{ vars.MACOS_VERSION }}
+    timeout-minutes: 5
+    env:
+      DEVELOPER_DIR: ${{ vars.XCODE_VERSION_PATH }}
 
     steps:
       - name: Checkout
@@ -16,22 +18,26 @@ jobs:
       - name: Configure NETRC for GitHub
         run: echo "${{ secrets.NETRC_GITHUB }}" >> ~/.netrc
 
-      - name: Select Xcode version
-        run: sudo xcode-select -s /Applications/Xcode_15.2.app
-
-      - name: Update SwiftPM
+      - name: Update Swift Packages
         run: |
           rm -f SampleApp/SampleApp.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved
           xcodebuild -resolvePackageDependencies -project SampleApp/SampleApp.xcodeproj -scheme SampleApp -scmProvider system
 
       - name: Create a Pull Request
+        id: create_pr
         uses: peter-evans/create-pull-request@v6
         with:
-          token: ${{ secrets.TOKEN_GITHUB }}
           commit-message: "⬆️ update Package.resolved"
           title: "⬆️ Update Swift Packages"
           body: |
             This PR updates the Swift Packages.
           branch: chore/update-swift-packages
           base: main
+          assignees: thenagain
+          reviewers: thenagain
           draft: true
+      - name: Check outputs
+        if: ${{ steps.create_pr.outputs.pull-request-number }}
+        run: |
+            echo "Pull Request Number - ${{ steps.create_pr.outputs.pull-request-number }}"
+            echo "Pull Request URL - ${{ steps.create_pr.outputs.pull-request-url }}"
