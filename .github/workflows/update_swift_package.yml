@@ -27,15 +27,12 @@ jobs:
         id: create_pr
         uses: peter-evans/create-pull-request@v6
         with:
-          token: ${{ secrets.TOKEN_GITHUB }}
           commit-message: "⬆️ update Package.resolved"
           title: "⬆️ Update Swift Packages"
           body: |
             This PR updates the Swift Packages.
           branch: chore/update-swift-packages
           base: main
-          assignees: thenagain
-          reviewers: thenagain
           draft: true
       - name: Check outputs
         if: ${{ steps.create_pr.outputs.pull-request-number }}
