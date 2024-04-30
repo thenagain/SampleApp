@@ -27,7 +27,6 @@ jobs:
         id: create_pr
         uses: peter-evans/create-pull-request@v6
         with:
-          token: ${{ secrets.TOKEN_GITHUB }}
           commit-message: "⬆️ update Package.resolved"
           title: "⬆️ Update Swift Packages"
           body: |
