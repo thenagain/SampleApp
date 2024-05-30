@@ -36,4 +36,4 @@ jobs:
           echo "url - ${{ steps.create_release.outputs.url }}"
           echo "id - ${{ steps.create_release.outputs.id }}"
           echo "upload_url - ${{ steps.create_release.outputs.upload_url }}"
-          echo "assets - ${{ steps.create_release.assets }}"
+          echo "assets[0].url - ${{ fromJSON(steps.create_release.assets)[0].url }}"
