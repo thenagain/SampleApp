@@ -1,0 +1,32 @@
+name: Upload Release Assets
+
+on:
+  workflow_dispatch:
+    branches: [main]
+    inputs:
+      version:
+        description: 'Version'
+        required: true
+
+jobs:
+  upload_release_assets:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Download OpenCV iOS Framework
+        run: |
+          wget https://github.com/opencv/opencv/releases/download/${{ github.event.inputs.version }}/opencv-${{ github.event.inputs.version }}-ios-framework.zip
+      
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            opencv-${{ github.event.inputs.version }}-ios-framework.zip
+          token: ${{ secrets.GITHUB_TOKEN }}
+          name: ${{ github.event.inputs.version }}
+          body: |
+            OpenCV iOS Framework
+          draft: true
+          prerelease: true
