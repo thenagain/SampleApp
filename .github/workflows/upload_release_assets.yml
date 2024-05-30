@@ -20,6 +20,7 @@ jobs:
           wget https://github.com/opencv/opencv/releases/download/${{ github.event.inputs.version }}/opencv-${{ github.event.inputs.version }}-ios-framework.zip
       
       - name: Create Release
+        id: create_release
         uses: softprops/action-gh-release@v2
         with:
           files: |
@@ -30,3 +31,9 @@ jobs:
             OpenCV iOS Framework
           draft: true
           prerelease: true
+      - name: Echo Release URL
+        run: |
+          echo "url - ${{ steps.create_release.outputs.url }}"
+          echo "id - ${{ steps.create_release.outputs.id }}"
+          echo "upload_url - ${{ steps.create_release.outputs.upload_url }}"
+          echo "assets - ${{ steps.create_release.assets }}"
