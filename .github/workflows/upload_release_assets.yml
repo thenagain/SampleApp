@@ -26,11 +26,13 @@ jobs:
           files: |
             opencv-${{ github.event.inputs.version }}-ios-framework.zip
           token: ${{ secrets.GITHUB_TOKEN }}
+          tag_name: ${{ github.event.inputs.version }}
           name: ${{ github.event.inputs.version }}
           body: |
             OpenCV iOS Framework
           draft: true
           prerelease: true
+
       - name: Get assets URL
         id: get_assets_url
         run: |
@@ -39,6 +41,7 @@ jobs:
             -H "X-GitHub-Api-Version: 2022-11-28" \
             https://api.github.com/repos/${{ github.repository }}/releases/${{ steps.create_release.outputs.id }} | jq -r '.assets[0].url')
           echo "ASSETS_URL=$ASSETS_URL" >> $GITHUB_ENV
+
       - name: Echo Release URL
         run: |
           echo "url - ${{ steps.create_release.outputs.url }}"
