@@ -30,12 +30,11 @@ jobs:
           name: ${{ github.event.inputs.version }}
           body: |
             OpenCV iOS Framework
-          draft: false
-          prerelease: true
 
       - name: Echo Release URL
         run: |
           echo "url - ${{ steps.create_release.outputs.url }}"
           echo "id - ${{ steps.create_release.outputs.id }}"
           echo "upload_url - ${{ steps.create_release.outputs.upload_url }}"
-          echo "assets_url - ${{ steps.create_release.outputs.assets }}"
+          echo "assets_name - ${{ fromJSON(steps.create_release.outputs.assets)[0].name }}"
+          echo "assets_url - ${{ fromJSON(steps.create_release.outputs.assets)[0].url }}"
