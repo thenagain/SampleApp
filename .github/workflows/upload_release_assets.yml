@@ -42,3 +42,5 @@ jobs:
           echo "assets[0]_url - ${{ fromJSON(steps.create_release.outputs.assets)[0].url }}"
           echo "assets[1]_name - ${{ fromJSON(steps.create_release.outputs.assets)[1].name }}"
           echo "assets[1]_url - ${{ fromJSON(steps.create_release.outputs.assets)[1].url }}"
+          iOSUrl=$(echo '${{ steps.create_release.outputs.assets }}' | jq -r '.[] | select(.name == "opencv-${{ github.event.inputs.version }}-ios-framework.zip").url')
+          echo "iOSUrl - $iOSUrl"
