@@ -2,7 +2,6 @@ name: Upload Release Assets
 
 on:
   workflow_dispatch:
-    branches: [main]
     inputs:
       version:
         description: 'Version'
@@ -18,6 +17,7 @@ jobs:
       - name: Download OpenCV iOS Framework
         run: |
           wget https://github.com/opencv/opencv/releases/download/${{ github.event.inputs.version }}/opencv-${{ github.event.inputs.version }}-ios-framework.zip
+          wget https://github.com/opencv/opencv/releases/download/${{ github.event.inputs.version }}/opencv-${{ github.event.inputs.version }}-android-sdk.zip
       
       - name: Create Release
         id: create_release
@@ -25,6 +25,7 @@ jobs:
         with:
           files: |
             opencv-${{ github.event.inputs.version }}-ios-framework.zip
+            opencv-${{ github.event.inputs.version }}-android-sdk.zip
           token: ${{ secrets.GITHUB_TOKEN }}
           tag_name: ${{ github.event.inputs.version }}
           name: ${{ github.event.inputs.version }}
@@ -36,5 +37,8 @@ jobs:
           echo "url - ${{ steps.create_release.outputs.url }}"
           echo "id - ${{ steps.create_release.outputs.id }}"
           echo "upload_url - ${{ steps.create_release.outputs.upload_url }}"
-          echo "assets_name - ${{ fromJSON(steps.create_release.outputs.assets)[0].name }}"
-          echo "assets_url - ${{ fromJSON(steps.create_release.outputs.assets)[0].url }}"
+          echo "assets - ${{ steps.create_release.outputs.assets }}"
+          echo "assets[0]_name - ${{ fromJSON(steps.create_release.outputs.assets)[0].name }}"
+          echo "assets[0]_url - ${{ fromJSON(steps.create_release.outputs.assets)[0].url }}"
+          echo "assets[1]_name - ${{ fromJSON(steps.create_release.outputs.assets)[1].name }}"
+          echo "assets[1]_url - ${{ fromJSON(steps.create_release.outputs.assets)[2].url }}"
