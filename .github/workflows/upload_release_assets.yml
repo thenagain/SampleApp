@@ -41,4 +41,4 @@ jobs:
           echo "assets[0]_name - ${{ fromJSON(steps.create_release.outputs.assets)[0].name }}"
           echo "assets[0]_url - ${{ fromJSON(steps.create_release.outputs.assets)[0].url }}"
           echo "assets[1]_name - ${{ fromJSON(steps.create_release.outputs.assets)[1].name }}"
-          echo "assets[1]_url - ${{ fromJSON(steps.create_release.outputs.assets)[2].url }}"
+          echo "assets[1]_url - ${{ fromJSON(steps.create_release.outputs.assets)[1].url }}"
